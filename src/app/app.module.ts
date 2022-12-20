@@ -6,11 +6,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
 import { EmployeesComponent } from './features/employees/components/employees/employees.component';
+import { EmployeeDetailComponent } from './features/employees/components/employee-detail/employee-detail.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     EmployeesComponent,
+    EmployeeDetailComponent,
   ],
   imports: [
     BrowserModule,
