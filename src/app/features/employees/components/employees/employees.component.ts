@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { EMPLOYEES } from 'src/app/core/constants/mock-employees';
 import { Employee } from 'src/app/core/models/employee';
+import { EmployeeService } from '../../services/employee.service';
+import { MessagesService } from 'src/app/features/messages/services/messages.service';
 
 @Component({
   selector: 'app-employees',
@@ -8,15 +9,21 @@ import { Employee } from 'src/app/core/models/employee';
   styleUrls: ['./employees.component.css']
 })
 export class EmployeesComponent implements OnInit {
-  employees = EMPLOYEES;
+  employees: Employee[] = [];
   selectedEmployee ?: Employee;
 
-  constructor() { }
+  constructor(private employeeService: EmployeeService, private messagesService: MessagesService) { }
 
   ngOnInit(): void {
+    this.getEmployees();
+  }
+
+  getEmployees(): void {
+    this.employeeService.getEmployees().subscribe(employees => this.employees = employees);
   }
 
   onSelect(employee: Employee) : void{
     this.selectedEmployee = employee;
+    this.messagesService.add(`EmployeesComponent: Selected employee id=${employee.id}`);
   }
 }
