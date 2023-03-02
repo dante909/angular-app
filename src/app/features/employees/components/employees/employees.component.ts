@@ -10,7 +10,6 @@ import { MessagesService } from 'src/app/features/messages/services/messages.ser
 })
 export class EmployeesComponent implements OnInit {
   employees: Employee[] = [];
-  selectedEmployee ?: Employee;
 
   constructor(private employeeService: EmployeeService, private messagesService: MessagesService) { }
 
@@ -20,10 +19,5 @@ export class EmployeesComponent implements OnInit {
 
   getEmployees(): void {
     this.employeeService.getEmployees().subscribe(employees => this.employees = employees);
-  }
-
-  onSelect(employee: Employee) : void{
-    this.selectedEmployee = employee;
-    this.messagesService.add(`EmployeesComponent: Selected employee id=${employee.id}`);
   }
 }

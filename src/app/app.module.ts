@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 import { EmployeesComponent } from './features/employees/components/employees/employees.component';
 import { EmployeeDetailComponent } from './features/employees/components/employee-detail/employee-detail.component';
 import { MessagesComponent } from './features/messages/components/messages/messages.component';
+import { DashboardComponent } from './features/dashboard/components/dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { MessagesComponent } from './features/messages/components/messages/messa
     EmployeesComponent,
     EmployeeDetailComponent,
     MessagesComponent,
+    DashboardComponent,
   ],
   imports: [
     BrowserModule,

@@ -16,4 +16,10 @@ export class EmployeeService {
     this.messagesService.add('EmployeeService: fetched employees');
     return employees;
   }
+
+  getEmployee(id: number): Observable<Employee> {
+    const employee = EMPLOYEES.find(employee => employee.id === id)!;
+    this.messagesService.add(`EmployeeService: fetched employee id=${id}`);
+    return of(employee);
+  }
 }
