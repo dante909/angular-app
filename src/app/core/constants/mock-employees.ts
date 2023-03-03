@@ -5,5 +5,6 @@ export const EMPLOYEES: Employee[] = [
   { id: 13, name: 'Michael Walton' },
   { id: 14, name: 'Christopher Holland' },
   { id: 15, name: 'Calvin Young' },
-  { id: 16, name: 'Daniil Sorokin' }
+  { id: 16, name: 'Daniil Sorokin' },
+  { id: 17, name: 'Christopher Lee' }
 ];
