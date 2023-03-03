@@ -3,7 +3,6 @@ import { HttpHeaders } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { Employee } from 'src/app/core/models/employee';
-import { EMPLOYEES } from 'src/app/core/constants/mock-employees';
 import { Observable, of } from 'rxjs';
 import { MessagesService } from '../../messages/services/messages.service';
 
@@ -61,6 +60,19 @@ export class EmployeeService {
 
   private log(message: string) {
     this.messagesService.add(`EmployeeService: ${message}`);
+    }
+
+    /* GET employees whose name contains search term */
+    searchEmployees(term: string): Observable<Employee[]> {
+      if (!term.trim()) {
+        return of([]);
+      }
+      return this.httpClient.get<Employee[]>(`${this.employeesUrl}/?name=${term}`).pipe(
+        tap(x => x.length ?
+           this.log(`found employees matching "${term}"`) :
+           this.log(`no employees matching "${term}"`)),
+        catchError(this.handleError<Employee[]>('searchEmployees', []))
+      );
     }
 
 /**
