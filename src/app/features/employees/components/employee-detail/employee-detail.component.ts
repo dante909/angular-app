@@ -3,6 +3,7 @@ import { Location } from '@angular/common';
 import { Component, OnInit, Input } from '@angular/core';
 import { Employee } from 'src/app/core/models/employee';
 import { EmployeeService } from '../../services/employee.service';
+import { FormControl, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-employee-detail',
@@ -11,6 +12,9 @@ import { EmployeeService } from '../../services/employee.service';
 })
 export class EmployeeDetailComponent {
   @Input() employee?: Employee;
+  isSubmitted = false;
+  editEmployeeForm: FormGroup;
+  ranks = ['None', 'Low', 'Medium', 'High'];
 
   constructor(
     private route: ActivatedRoute,
@@ -19,6 +23,13 @@ export class EmployeeDetailComponent {
     ) {}
 
     ngOnInit(): void {
+      this.editEmployeeForm = new FormGroup({
+        name: new FormControl(null),
+        surname: new FormControl(null),
+        email: new FormControl(null),
+        rank: new FormControl(null)
+      });
+
       this.getEmployee();
     }
 
@@ -32,6 +43,7 @@ export class EmployeeDetailComponent {
     }
 
     save(): void {
+      this.isSubmitted = true;
       if (this.employee) {
         this.employeeService.updateEmployee(this.employee)
           .subscribe(() => this.goBack());

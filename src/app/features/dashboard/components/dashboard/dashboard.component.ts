@@ -17,6 +17,7 @@ export class DashboardComponent {
   }
 
   getEmployees(){
-    this.employeeService.getEmployees().subscribe(employees => this.employees = employees.slice(1,5))
+    this.employeeService.getEmployees()
+    .subscribe(employees => this.employees = employees.filter(e => e.rank === 'High'))
   }
 }

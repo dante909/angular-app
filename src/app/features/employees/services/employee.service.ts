@@ -37,14 +37,14 @@ export class EmployeeService {
 
   updateEmployee(employee: Employee): Observable<any> {
     return this.httpClient.put(this.employeesUrl, employee, this.httpOptions).pipe(
-      tap(_ => this.log(`updated imployee id=${employee.id}`)),
+      tap(_ => this.log(`updated employee id=${employee.id}, ${JSON.stringify(employee)}`)),
       catchError(this.handleError<any>('updateEmployee'))
     )
   }
 
   addEmployee(employee: Employee): Observable<Employee> {
     return this.httpClient.post<Employee>(this.employeesUrl, employee, this.httpOptions).pipe(
-      tap((newEmployee: Employee) => this.log(`added employee w/ id=${newEmployee.id}`)),
+      tap((newEmployee: Employee) => this.log(`added employee id=${newEmployee.id}, ${JSON.stringify(newEmployee)}`)),
       catchError(this.handleError<Employee>('addEmployee'))
     );
   }

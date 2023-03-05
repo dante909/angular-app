@@ -1,10 +1,23 @@
 <div *ngIf="employee">
-    <h2>{{employee.name | uppercase}} Details</h2>
-    <div>id: {{employee.id}}</div>
-    <div>
-      <label for="employee-name">Employee name: </label>
-      <input id="employee-name" [(ngModel)]="employee.name" placeholder="name">
-    </div>
+  <h2>{{employee.name + ' ' + employee.surname| uppercase}} Details</h2>
+  <div>id: {{employee.id}}</div>
+  <form [formGroup]="editEmployeeForm" (ngSubmit)="save()">
+
+    <label for="employee-name">Employee name: </label>
+    <input id="employee-name" [(ngModel)]="employee.name" #employeeName type="text" formControlName="name"/>
+  
+    <label for="employee-surname">Employee surname: </label>
+    <input id="employee-surname" [(ngModel)]="employee.surname" #employeeSurname type="text" formControlName="surname"/>
+  
+    <label for="employee-email">Email: </label>
+    <input id="employee-email" [(ngModel)]="employee.email" #employeeEmail type="text" formControlName="email"/>
+  
+    <label for="employee-rank">Rank:</label><br>
+    <select formControlName="rank" [(ngModel)]="employee.rank">
+      <option *ngFor="let rank of ranks" [ngValue]="rank">{{rank}}</option>
+    </select><br>
+
+    <button type="submit">save</button>
     <button type="button" (click)="goBack()">go back</button>
-    <button type="button" (click)="save()">save</button>
+  </form>
 </div>
