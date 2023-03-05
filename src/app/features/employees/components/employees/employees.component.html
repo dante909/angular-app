@@ -1,11 +1,9 @@
 <h2>List of Employees</h2>
-<div>
-  <label for="new-employee">Employee name: </label>
-  <input id="new-employee" #employeeName />
-  <button type="button" class="add-button" (click)="add(employeeName.value); employeeName.value=''">
-    Add employee
-  </button>
-</div>
+<form [formGroup]="addEmployeeForm" (ngSubmit)="onSubmit()">
+  <label for="new-employee-name">Employee name: </label>
+  <input id="new-employee-name" #employeeName type="text" formControlName="name"/>
+  <button type="submit" class="add-button"> Add employee </button>
+</form>
 <ul class="employees">
   <li *ngFor="let employee of employees">
     <a routerLink="/detail/{{employee.id}}">

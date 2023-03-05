@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Employee } from 'src/app/core/models/employee';
 import { EmployeeService } from '../../services/employee.service';
 import { MessagesService } from 'src/app/features/messages/services/messages.service';
+import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-employees',
@@ -9,11 +10,17 @@ import { MessagesService } from 'src/app/features/messages/services/messages.ser
   styleUrls: ['./employees.component.css']
 })
 export class EmployeesComponent implements OnInit {
+  isSubmitted = false;
   employees: Employee[] = [];
+  addEmployeeForm: FormGroup;
 
   constructor(private employeeService: EmployeeService, private messagesService: MessagesService) { }
 
   ngOnInit(): void {
+  this.addEmployeeForm = new FormGroup({
+    name: new FormControl(null),
+  });
+
     this.getEmployees();
   }
 
@@ -21,13 +28,15 @@ export class EmployeesComponent implements OnInit {
     this.employeeService.getEmployees().subscribe(employees => this.employees = employees);
   }
 
-  add(name: string): void {
-    name = name.trim();
-    if (!name) { return; }
-    this.employeeService.addEmployee({ name } as Employee)
-      .subscribe(employee => {
-        this.employees.push(employee);
-      });
+  onSubmit(): void {
+    this.isSubmitted = true;
+    if (!this.addEmployeeForm.value) { return; }
+
+    let employee = new Employee({
+      name: this.addEmployeeForm.value.name as string
+    });
+
+    this.employeeService.addEmployee(employee).subscribe(employee => { this.employees.push(employee); });
   }
 
   delete(employee: Employee): void {
