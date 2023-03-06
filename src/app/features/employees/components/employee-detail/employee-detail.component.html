@@ -17,7 +17,8 @@
       <option *ngFor="let rank of ranks" [ngValue]="rank">{{rank}}</option>
     </select><br>
 
-    <button type="submit">save</button>
+    <button type="submit" [disabled]="!editEmployeeForm.valid">save</button>
     <button type="button" (click)="goBack()">go back</button>
+    <p>Form Status: {{ editEmployeeForm.status }}</p>
   </form>
 </div>

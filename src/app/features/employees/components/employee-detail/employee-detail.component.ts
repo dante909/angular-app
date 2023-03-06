@@ -24,10 +24,10 @@ export class EmployeeDetailComponent {
 
     ngOnInit(): void {
       this.editEmployeeForm = new FormGroup({
-        name: new FormControl(null),
-        surname: new FormControl(null),
-        email: new FormControl(null),
-        rank: new FormControl(null)
+        name: new FormControl(null, [ Validators.maxLength(8), Validators.required]),
+        surname: new FormControl(null, [ Validators.maxLength(8), Validators.required]),
+        email: new FormControl(null, [ Validators.email, Validators.required ]),
+        rank: new FormControl(null, Validators.required)
       });
 
       this.getEmployee();

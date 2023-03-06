@@ -15,7 +15,8 @@
     <option *ngFor="let rank of ranks" [ngValue]="rank">{{rank}}</option>
   </select><br>
 
-  <button type="submit" class="add-button"> Add employee </button>
+  <button type="submit" [disabled]="!addEmployeeForm.valid" class="add-button"> Add employee </button>
+  <p>Form Status: {{ addEmployeeForm.status }}</p>
 </form>
 <ul class="employees">
   <li *ngFor="let employee of employees">
